@@ -5,11 +5,14 @@ const Routes = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/" render={() => <Redirect to="/search" />} />
         <Route
           exact
-          key="/search_/favorite"
-          path={["/search", "/favorite"]}
+          path="/algoliasearch-demo"
+          render={() => <Redirect to="/algoliasearch-demo/search" />}
+        />
+        <Route
+          exact
+          path={["/algoliasearch-demo/search", "/algoliasearch-demo/favorite"]}
           component={SearchWithFavorite}
         />
       </Switch>
