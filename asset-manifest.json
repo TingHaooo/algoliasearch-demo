@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/algoliasearch-demo/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/algoliasearch-demo/static/js/main.9853fe9c.chunk.js",
-    "main.js.map": "/algoliasearch-demo/static/js/main.9853fe9c.chunk.js.map",
+    "main.js": "/algoliasearch-demo/static/js/main.779aac62.chunk.js",
+    "main.js.map": "/algoliasearch-demo/static/js/main.779aac62.chunk.js.map",
     "runtime-main.js": "/algoliasearch-demo/static/js/runtime-main.b548162f.js",
     "runtime-main.js.map": "/algoliasearch-demo/static/js/runtime-main.b548162f.js.map",
     "static/js/2.6663ed50.chunk.js": "/algoliasearch-demo/static/js/2.6663ed50.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b548162f.js",
     "static/js/2.6663ed50.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.9853fe9c.chunk.js"
+    "static/js/main.779aac62.chunk.js"
   ]
 }
