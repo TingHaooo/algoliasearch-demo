@@ -1,8 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Item from "./Item";
 import { useAlgoArticles } from "../../hooks";
 import { IArticle } from "../../hooks/useAlgoArticles";
 import Button from "./Button";
+import { Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 interface ISearchItemProps {
   favorites: IArticle[];
@@ -58,18 +60,25 @@ const Search = (props: ISearchProps) => {
   const { handleButtonClick, favorites } = props;
   const [search, setSearch] = useState("");
   const { data, error, loading, refetch } = useAlgoArticles<IArticle[]>();
+  const [onSearch$] = useState(() => new Subject<string>());
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    refetch(e.target.value);
+    onSearch$.next(e.target.value);
   };
+
+  useEffect(() => {
+    const subscription = onSearch$
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((s: string) => refetch(s));
+
+    return () => subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (error) {
     return <div>{"Something went wrong :_("}</div>;
   }
-
-  console.log("data");
-  console.log(data);
 
   return (
     <div>
