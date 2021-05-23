@@ -8,7 +8,7 @@ interface IFavoriteItemProps {
   handleButtonClick: (data: IArticle) => void;
 }
 
-const FavoriteItem = (props: IFavoriteItemProps) => {
+export const FavoriteItem = (props: IFavoriteItemProps) => {
   const { favorite, handleButtonClick } = props;
   const [isHover, setIsHover] = useState(false);
 
