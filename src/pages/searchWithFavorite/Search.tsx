@@ -12,7 +12,7 @@ interface ISearchItemProps {
   handleButtonClick: (data: IArticle) => void;
 }
 
-const SearchItem = (props: ISearchItemProps) => {
+export const SearchItem = (props: ISearchItemProps) => {
   const { data, handleButtonClick, favorites } = props;
   const [isHover, setIsHover] = useState(false);
   const isInFavorites = favorites
