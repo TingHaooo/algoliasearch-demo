@@ -28,7 +28,6 @@ const useAlgoArticles = <T>() => {
       })
       setData(hits as any)
     } catch (e) {
-      console.log(e)
       setError(e)
     } finally {
       setLoading(false)
