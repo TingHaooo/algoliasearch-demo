@@ -5,7 +5,7 @@ import { IArticle } from "../../hooks/useAlgoArticles";
 import Button from "./Button";
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-
+import { SearchIndex } from "algoliasearch";
 interface ISearchItemProps {
   favorites: IArticle[];
   data: IArticle;
@@ -54,12 +54,15 @@ export const SearchItem = (props: ISearchItemProps) => {
 interface ISearchProps {
   handleButtonClick: (article: IArticle) => void;
   favorites: IArticle[];
+  index: SearchIndex;
 }
 
 const Search = (props: ISearchProps) => {
-  const { handleButtonClick, favorites } = props;
+  const { handleButtonClick, favorites, index } = props;
   const [search, setSearch] = useState("");
-  const { data, error, loading, refetch } = useAlgoArticles<IArticle[]>();
+  const { data, error, loading, refetch } = useAlgoArticles<IArticle[]>({
+    index,
+  });
   const [onSearch$] = useState(() => new Subject<string>());
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
