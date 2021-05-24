@@ -1,55 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import Item from "./Item";
-import { useAlgoArticles } from "../../hooks";
-import { IArticle } from "../../hooks/useAlgoArticles";
-import Button from "./Button";
+
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { SearchIndex } from "algoliasearch";
-interface ISearchItemProps {
-  favorites: IArticle[];
-  data: IArticle;
-  handleButtonClick: (data: IArticle) => void;
-}
-
-export const SearchItem = (props: ISearchItemProps) => {
-  const { data, handleButtonClick, favorites } = props;
-  const [isHover, setIsHover] = useState(false);
-  const isInFavorites = favorites
-    .map((favorite) => favorite.objectID)
-    .includes(data.objectID);
-
-  return (
-    <div
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <Item
-        data={data}
-        key={data.objectID}
-        button={
-          isInFavorites ? (
-            <Button
-              isActive={isHover}
-              handleButtonClick={() => handleButtonClick(data)}
-            >
-              {isHover ? "Unsave" : "Saved"}
-            </Button>
-          ) : isHover ? (
-            <Button
-              isActive={true}
-              handleButtonClick={() => handleButtonClick(data)}
-            >
-              Save
-            </Button>
-          ) : (
-            <></>
-          )
-        }
-      ></Item>
-    </div>
-  );
-};
+import useAlgoArticles, { IArticle } from "../../../hooks/useAlgoArticles";
+import SearchItem from "./SearchItem";
 
 interface ISearchProps {
   handleButtonClick: (article: IArticle) => void;

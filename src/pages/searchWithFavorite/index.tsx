@@ -1,5 +1,5 @@
 import Favorite from "./Favorite";
-import Search from "./Search";
+import Search from "./search";
 import { useHistory, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { IArticle } from "../../hooks/useAlgoArticles";
