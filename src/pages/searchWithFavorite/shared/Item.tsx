@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IArticle } from "../../hooks/useAlgoArticles";
+import { IArticle } from "../../../hooks/useAlgoArticles";
 interface IItemProps {
   data: IArticle;
   button: ReactNode;

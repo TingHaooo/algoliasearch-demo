@@ -1,5 +1,4 @@
-import Button from "../Button";
-import Item from "../Item";
+import { Button, Item } from "../shared";
 import { useState } from "react";
 import { IArticle } from "../../../hooks/useAlgoArticles";
 

@@ -1,6 +1,5 @@
-import Item from "../Item";
+import { Button, Item } from "../shared";
 import { IArticle } from "../../../hooks/useAlgoArticles";
-import Button from "../Button";
 import { useState } from "react";
 
 interface ISearchItemProps {
