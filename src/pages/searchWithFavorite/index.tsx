@@ -1,4 +1,4 @@
-import Favorite from "./Favorite";
+import Favorite from "./favorite";
 import Search from "./search";
 import { useHistory, useLocation } from "react-router-dom";
 import { useState } from "react";

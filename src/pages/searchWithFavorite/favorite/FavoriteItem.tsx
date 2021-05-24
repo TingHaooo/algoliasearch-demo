@@ -1,14 +1,14 @@
+import Button from "../Button";
+import Item from "../Item";
 import { useState } from "react";
-import { IArticle } from "../../hooks/useAlgoArticles";
-import Button from "./Button";
-import Item from "./Item";
+import { IArticle } from "../../../hooks/useAlgoArticles";
 
 interface IFavoriteItemProps {
   favorite: IArticle;
   handleButtonClick: (data: IArticle) => void;
 }
 
-export const FavoriteItem = (props: IFavoriteItemProps) => {
+const FavoriteItem = (props: IFavoriteItemProps) => {
   const { favorite, handleButtonClick } = props;
   const [isHover, setIsHover] = useState(false);
 
@@ -33,24 +33,4 @@ export const FavoriteItem = (props: IFavoriteItemProps) => {
   );
 };
 
-interface IFavoriteProps {
-  favorites: IArticle[];
-  handleButtonClick: (article: IArticle) => void;
-}
-
-const Favorite = (props: IFavoriteProps) => {
-  const { favorites, handleButtonClick } = props;
-  return (
-    <div>
-      {favorites.map((favorite) => (
-        <FavoriteItem
-          key={favorite.objectID}
-          favorite={favorite}
-          handleButtonClick={handleButtonClick}
-        />
-      ))}
-    </div>
-  );
-};
-
-export default Favorite;
+export default FavoriteItem;
