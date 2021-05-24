@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useContext } from "react"
-import { algoContext } from "../App"
+import { SearchIndex } from "algoliasearch";
+import { useState, useRef } from "react"
 
 type Maybe<T> = T |undefined
 
@@ -10,27 +10,39 @@ export interface IArticle {
   objectID: string;
   title: string;
 }
+interface IUseAlgoArticles {
+  index: SearchIndex
+}
 
-const useAlgoArticles = <T>() => {
+const useAlgoArticles = <T>({ index }: IUseAlgoArticles) => {
 
-  const { index } = useContext(algoContext)
   const [data, setData] = useState<Maybe<T>>(undefined)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Maybe<Error>>(undefined)
+  const lastPromise = useRef<any>()
 
   const fetchData = async (queryString: string) => {
-    if (queryString === "") {
-      setData(undefined)
-      return 
-    }
     setLoading(true)
     setError(undefined)
     try {
-      const { hits } = await index.search<T>(queryString, {
-        attributesToRetrieve: ['title', 'categories', 'author_name'],
-        hitsPerPage: 50,
+
+      // send request
+      const createIndexSearchPromise = queryString === "" ? new Promise<{ hits: undefined }>((resolve, reject) => {
+        resolve({ hits: undefined })
+      }) : index.search<T>(queryString, {
+          attributesToRetrieve: ['title', 'categories', 'author_name'],
+          hitsPerPage: 50,
       })
-      setData(hits as any)
+      
+      // save last promise
+      lastPromise.current = createIndexSearchPromise 
+
+      const { hits } = await createIndexSearchPromise
+
+      // To avoid race condition, only setDate if response is come from last promise
+      if (lastPromise.current === createIndexSearchPromise) {
+        setData(hits as any)
+      }
     } catch (e) {
       setError(e)
     } finally {
