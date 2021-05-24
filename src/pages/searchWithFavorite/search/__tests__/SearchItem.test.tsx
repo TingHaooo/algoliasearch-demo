@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { IArticle } from "../../../hooks/useAlgoArticles";
-import SearchItem from "../search/SearchItem";
+import { IArticle } from "../../../../hooks/useAlgoArticles";
+import SearchItem from "../SearchItem";
 
 const fakeArticle: IArticle = {
   author_name: "Jon Snow",
