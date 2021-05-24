@@ -19,6 +19,10 @@ const useAlgoArticles = <T>() => {
   const [error, setError] = useState<Maybe<Error>>(undefined)
 
   const fetchData = async (queryString: string) => {
+    if (queryString === "") {
+      setData(undefined)
+      return 
+    }
     setLoading(true)
     setError(undefined)
     try {
