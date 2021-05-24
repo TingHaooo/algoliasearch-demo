@@ -37,23 +37,23 @@ const Index = () => {
     <>
       <TabList>
         <Tab
-          handleOnClick={() => history.push("/algoliasearch-demo/search")}
-          isCur={location.pathname === "/algoliasearch-demo/search"}
+          handleOnClick={() => history.push("/search")}
+          isCur={location.pathname === "/search"}
         >
           Search
         </Tab>
         <Tab
-          handleOnClick={() => history.push("/algoliasearch-demo/favorite")}
-          isCur={location.pathname === "/algoliasearch-demo/favorite"}
+          handleOnClick={() => history.push("/favorite")}
+          isCur={location.pathname === "/favorite"}
         >
           Favorite
         </Tab>
       </TabList>
       <TabPanels>
-        <TabPanel isCur={location.pathname === "/algoliasearch-demo/search"}>
+        <TabPanel isCur={location.pathname === "/search"}>
           <Search handleButtonClick={handleButtonClick} favorites={favorites} />
         </TabPanel>
-        <TabPanel isCur={location.pathname === "/algoliasearch-demo/favorite"}>
+        <TabPanel isCur={location.pathname === "/favorite"}>
           <Favorite
             favorites={favorites}
             handleButtonClick={handleButtonClick}
