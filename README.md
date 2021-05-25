@@ -2,7 +2,7 @@
 
 This project is using [Create React App](https://github.com/facebook/create-react-app).
 
-Preview: [https://tinghaooo.github.io/algoliasearch-demo/](https://tinghaooo.github.io/algoliasearch-demo/)
+Preview: [https://nifty-franklin-6900fd.netlify.app](https://nifty-franklin-6900fd.netlify.app/)
 
 ## Prerequisite
 

@@ -1,65 +1,23 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import Item from "./Item";
-import { useAlgoArticles } from "../../hooks";
-import { IArticle } from "../../hooks/useAlgoArticles";
-import Button from "./Button";
+
 import { Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-
-interface ISearchItemProps {
-  favorites: IArticle[];
-  data: IArticle;
-  handleButtonClick: (data: IArticle) => void;
-}
-
-export const SearchItem = (props: ISearchItemProps) => {
-  const { data, handleButtonClick, favorites } = props;
-  const [isHover, setIsHover] = useState(false);
-  const isInFavorites = favorites
-    .map((favorite) => favorite.objectID)
-    .includes(data.objectID);
-
-  return (
-    <div
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <Item
-        data={data}
-        key={data.objectID}
-        button={
-          isInFavorites ? (
-            <Button
-              isActive={isHover}
-              handleButtonClick={() => handleButtonClick(data)}
-            >
-              {isHover ? "Unsave" : "Saved"}
-            </Button>
-          ) : isHover ? (
-            <Button
-              isActive={true}
-              handleButtonClick={() => handleButtonClick(data)}
-            >
-              Save
-            </Button>
-          ) : (
-            <></>
-          )
-        }
-      ></Item>
-    </div>
-  );
-};
+import { SearchIndex } from "algoliasearch";
+import useAlgoArticles, { IArticle } from "../../../hooks/useAlgoArticles";
+import SearchItem from "./SearchItem";
 
 interface ISearchProps {
   handleButtonClick: (article: IArticle) => void;
   favorites: IArticle[];
+  index: SearchIndex;
 }
 
 const Search = (props: ISearchProps) => {
-  const { handleButtonClick, favorites } = props;
+  const { handleButtonClick, favorites, index } = props;
   const [search, setSearch] = useState("");
-  const { data, error, loading, refetch } = useAlgoArticles<IArticle[]>();
+  const { data, error, loading, refetch } = useAlgoArticles<IArticle[]>({
+    index,
+  });
   const [onSearch$] = useState(() => new Subject<string>());
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {

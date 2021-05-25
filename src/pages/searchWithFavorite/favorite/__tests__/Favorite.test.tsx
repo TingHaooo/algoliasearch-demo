@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { IArticle } from "../../../hooks/useAlgoArticles";
-import { FavoriteItem } from "../Favorite";
+import { IArticle } from "../../../../hooks/useAlgoArticles";
+import FavoriteItem from "../FavoriteItem";
 
 const fakeArticle: IArticle = {
   author_name: "Jon Snow",
